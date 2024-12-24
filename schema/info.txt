@@ -1,0 +1,14 @@
+Миграции с migrate
+Установка через brew: brew install golang-migrate
+repo: https://github.com/golang-migrate/migrate
+
+Создание миграций: migrate create -ext sql -dir ./schema -seq init     # в папке schema создадутся миграции с названием init
+
+Модели описываем вручную
+
+Применение миграций:  1. migrate -path ./schema -database 'postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable' up
+                      2. migrate -path ./schema -database 'postgres://postgres:postgres@localhost:5432/postgres?sslmode=disable' down
+
+
+При откате миграций важно учитывать порядок при котором будут удалены таблицы. Важно, чтобы в первую очередь были удалены
+дочерние таблицы, а затем родительские
